@@ -34,3 +34,14 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Assets/Resources/SteamVR
+Assets/Resources/SteamVR_Input
+Assets/Resources/SteamVR_Resources
+Assets/Resources/SampleScenes
+Assets/Resources/Standard Assets
+Assets/StreamingAssets
+Assets/SteamVR
+Assets/SteamVR_Input
+Assets/SteamVR_Resources
+Assets/SampleScenes
+Assets/Standard Assets
