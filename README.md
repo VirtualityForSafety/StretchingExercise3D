@@ -28,6 +28,9 @@ StretchingExercise3D is a stretching exercise which includes five sequential pos
 This project has been implemented through a [research collaboration](https://virtualityforsafety.github.io/about/) with KAIST (Hyeopwoo Lee), Xi’an Jiaotong-Liverpool University (Prof. Hai-Ning Liang,
 Diego Vilela Monteiro), and Handong Global University (Prof. Daseong Han, Betty Hyejin Kim, Youngnoh Goh).
 
+## Resources
+Background music is ["Sequence 3" by almusic34](https://freesound.org/people/almusic34/sounds/391629/). 
+
 ## Maintainer
 - [Jinki Jung](https://jinkijung.github.io/)
 
