@@ -1,6 +1,6 @@
 # StretchingExercise3D
 
-StretchingExercise3D is a stretching exercise which includes five sequential poses to remember. You can find the original description of the task in the 'Annotation vs. Virtual Tutor: Comparative Analysis on the Effectiveness of Visual Instructions in Immersive Virtual Reality' which will be appeared at [ISMAR 2019](https://www.ismar19.org/). This implementation is an open source version so that only license-free resources are included. This version is a reimplemented version based on [Tasc-Unity](https://github.com/JinkiJung/Tasc-Unity).
+StretchingExercise3D is a stretching exercise which includes five sequential poses to remember. You can find the original description of the task in [Annotation vs. Virtual Tutor: Comparative Analysis on the Effectiveness of Visual Instructions in Immersive Virtual Reality](https://www.researchgate.net/publication/336592427_Annotation_vs_Virtual_Tutor_Comparative_Analysis_on_the_Effectiveness_of_Visual_Instructions_in_Immersive_Virtual_Reality) appeared at [ISMAR 2019](https://www.ismar19.org/). This implementation is an open source version so that only license-free resources are included. This version is a reimplemented version based on [Tasc-Unity](https://github.com/JinkiJung/Tasc-Unity).
 
 ## Development environment
 * Unity 2018 2.0f2
