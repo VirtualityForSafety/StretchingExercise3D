@@ -95,9 +95,12 @@ namespace Tasc
             }
         }
 
-        public virtual void UpdateInstructions(List<Interface> interfaces)
+        public void UpdateInstructions(List<Interface> interfaces)
         {
-
+            for (int i = 0; i < interfaces.Count; i++)
+            {
+                terminus.UpdateInterface(interfaces[i]);
+            }
         }
 
         //-------------------------------------------------

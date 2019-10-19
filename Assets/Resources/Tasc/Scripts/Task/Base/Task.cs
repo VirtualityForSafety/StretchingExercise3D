@@ -15,7 +15,7 @@ namespace Tasc
         public Terminus target;
         public Task action;
         public Condition exit;
-        public Instruction instruction;
+        public List<Instruction> instructions;
         public Dictionary<TaskEndState, Task> next;
         public TimeState startingTime;
         
@@ -31,6 +31,7 @@ namespace Tasc
             isActivated = false;
             next = new Dictionary<TaskEndState, Task>();
             entrance = Condition.DummyCondition;
+            instructions = new List<Instruction>();
         }
 
         public Task(bool _isActivated): this()
@@ -78,6 +79,11 @@ namespace Tasc
                 next[taskEndState].Activate();
         }
 
+        public void AddInstruction(Instruction instruction)
+        {
+            instructions.Add(instruction);
+        }
+
         public void Activate()
         {
             if (!isActivated)
@@ -99,7 +105,7 @@ namespace Tasc
             }
         }
 
-        public bool Proceed(List<Interface> interfaces)
+        public bool Proceed()
         {
             if (entrance == null || exit == null)
                 throw new MissingComponentException();
@@ -118,16 +124,24 @@ namespace Tasc
             }
             else if (state == TaskProgressState.Started)
             {
-                if (interfaces.Count > 0)
+                for (int i = 0; i < instructions.Count; i++)
                 {
-                    instruction.Proceed(interfaces);
-                    if (!instruction.isAudioInstructionEnded())
+                    instructions[i].Proceed();
+                    if (!instructions[i].isAudioInstructionEnded())
                         cantSkipInterval--;
                 }                    
                 if (exit.Check())// && cantSkipInterval < 0)
                 {
-                    state = TaskProgressState.Ended;
-                    MoveNext(Evaluate());
+                    TaskEndState result = Evaluate();
+                    if(result == TaskEndState.Correct)
+                    {
+                        state = TaskProgressState.Ended;
+                        for (int i = 0; i < instructions.Count; i++)
+                        {
+                            instructions[i].WrapUp();
+                        }
+                        MoveNext(result);
+                    }
                 }
                 
             }

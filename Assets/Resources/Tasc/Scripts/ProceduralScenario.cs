@@ -55,11 +55,11 @@ namespace Tasc
             */
         }
 
-        public void Proceed(List<Interface> interfaces)
+        public void Proceed()
         {
             for (int i = 0; i < scenario.Count; i++)
             {
-                scenario[i].Proceed(interfaces);
+                scenario[i].Proceed();
                 if (scenario[i].HasFinished())
                     scenario.RemoveAt(i);
             }

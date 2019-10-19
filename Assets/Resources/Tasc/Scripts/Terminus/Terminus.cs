@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace Tasc
 {
-    public class Terminus :MonoBehaviour
+    public class Terminus : TransferElement
     {
-        public Information information;
         public Collider terminusChecker;
 
-        private Vector3 previousPosition;
+        private Vector3 previousPosition;        
 
         public virtual void Send()
         {
@@ -47,7 +46,6 @@ namespace Tasc
 
         public virtual void Initialize()
         {
-            information = new Information();
             name = transform.name;
         }
 
@@ -56,11 +54,11 @@ namespace Tasc
             return null;
         }
 
-        public virtual void UpdateInformation()
+        public virtual void UpdateInterface(Interface relatedInterface)
         {
-            information.SetContent(ToString(), Information.Context.Status);
+            relatedInterface.SetInformation(ToString());
         }
-        
+
         public override string ToString()
         {
             return name;

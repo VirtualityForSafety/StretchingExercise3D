@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,65 +9,60 @@ namespace Tasc
     {
         public enum TaskContext { None, Training, Tutorial, Assessment };
         public Information information;
-        //public string content;
         public string name;
-
+        protected List<TransferElement> interfaces;
         int narrationInterval;
         private bool isNarrationStarted = false;
         private bool isNarrationEnded = false;
-        public Dictionary<string, int> contextLookup;
 
-        public Instruction()
+        public Instruction(List<TransferElement> givenInterfaces)
         {
             name = "";
+            interfaces = givenInterfaces;
             information = new Information();
-            contextLookup = new Dictionary<string, int>();
         }
 
-        public Instruction(string givenTitle)
+        public Instruction(string givenTitle, List<TransferElement> givenInterfaces)
         {
             name = givenTitle;
+            interfaces = givenInterfaces;
             information = new Information();
         }
 
-        public void SetDefaultTitleAndDescription(string title, string inputContent)
+        public Instruction(Instruction another)
         {
-            SetContentWithContext(title, Information.Context.Title);
-            SetDefaultDescription(inputContent);
+            name = another.name;
+            information = new Information(another.information);
+            interfaces = new List<TransferElement>();
+            for(int i=0; i< another.interfaces.Count; i++)
+                interfaces.Add(another.interfaces[i]); 
         }
 
-        public void SetDefaultDescription(string inputContent)
+        public void SetContent(string context, string inputContent)
         {
-            SetContentWithContext(inputContent, Information.Context.Narration);
-            SetContentWithContext(inputContent, Information.Context.Description);
+            information.SetContent(context, inputContent);
         }
 
-        public void SetContentWithContext(string inputContent, Information.Context context)
-        {
-            information.SetContent(inputContent, context);
-        }
-
-        public string GetContentWithContext(Information.Context context)
+        public string GetContent(string context)
         {
             return information.GetContent(context);
         }
 
-        public void Proceed(List<Interface> interfaces, bool isAudioEnabled = true)
+        public virtual void Proceed(bool isAudioEnabled = true)
         {
             if (!isNarrationStarted)
             {
-                //Narrator.speak("안녕하십니까요.");
                 for(int i=0; i< interfaces.Count; i++)
                 {
                     if(interfaces[i] is VoiceInterface)
                     {
                         if (isAudioEnabled)
-                            interfaces[i].Transfer(information.GetContent(interfaces[i].context));
+                            interfaces[i].SetInformation(information.GetContent(interfaces[i].type));
                     }
                     else
                     {
                         if(interfaces[i]!=null)
-                            interfaces[i].Transfer(information.GetContent(interfaces[i].context));
+                            interfaces[i].SetInformation(information.GetContent(interfaces[i].type));
                     }
                 }
                 
@@ -79,6 +75,11 @@ namespace Tasc
                     isNarrationEnded = false;
                 narrationInterval--;
             }
+        }
+
+        public virtual void WrapUp()
+        {
+
         }
 
         public bool isAudioInstructionEnded()

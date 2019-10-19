@@ -30,13 +30,5 @@ namespace Tasc
             }
         }
 
-        public override void UpdateInstructions(List<Interface> interfaces)
-        {
-            for (int i = 0; i < interfaces.Count; i++)
-            {
-                terminus.UpdateInformation();
-                interfaces[i].Transfer(terminus.information.GetContent(interfaces[i].context));
-            }
-        }
     }
 }

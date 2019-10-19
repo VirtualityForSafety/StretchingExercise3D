@@ -2303,6 +2303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2992dff70beb44b4890c7f87f38612b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 
+  context: []
   terminusChecker: {fileID: 0}
   isWalkable: 1
 --- !u!114 &114135139926761830
@@ -2364,6 +2366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa5bdda3764a8f459fd96fc12da2863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 
+  context: []
   terminusChecker: {fileID: 0}
 --- !u!114 &114280865114953966
 MonoBehaviour:
@@ -2702,7 +2706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a86ea52710a9b7419ef091cb43f7234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  context: 1
+  type: 
+  context: []
 --- !u!114 &114676609482267138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2875,7 +2880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a86ea52710a9b7419ef091cb43f7234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  context: 2
+  type: 
+  context: []
 --- !u!114 &114782717320959834
 MonoBehaviour:
   m_ObjectHideFlags: 1

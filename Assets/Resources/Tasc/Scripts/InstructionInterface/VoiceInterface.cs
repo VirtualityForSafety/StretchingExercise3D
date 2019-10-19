@@ -62,7 +62,7 @@ namespace Tasc
 #endif
         }
 
-        public override void Transfer(string msg)
+        public override void SetInformation(string msg)
         {
             VoiceInterface.Speak(msg, false);
         }

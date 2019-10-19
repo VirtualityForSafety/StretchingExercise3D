@@ -7,7 +7,7 @@ namespace Tasc
 {
     public class VisualInterface : Interface
     {
-        public override void Transfer(string msg)
+        public override void SetInformation(string msg)
         {
             Set3DText(msg);
             Set2DText(msg);

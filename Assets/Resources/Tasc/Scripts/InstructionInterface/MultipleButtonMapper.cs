@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Tasc
 {
-    public class MultipleButtonMapper : Annotation
+    public class MultipleButtonMapper : VisualInterface
     {
         public List<InteractableButton> interactableButtons;
         private int recentlyPushedIdx = -1;
         private string result = "";
-        public override void Transfer(string msg)
+        public override void SetInformation(string msg)
         {
             for (int i=0; i< interactableButtons.Count; i++)
             {
