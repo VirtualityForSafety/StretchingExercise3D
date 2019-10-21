@@ -710,7 +710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: narration
   context: []
-  voiceIdx: 0
+  voiceIdx: 1
 --- !u!114 &717646450 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114134888200295190, guid: 7872d1200b04c3c439774372909cf319,
@@ -902,6 +902,21 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114266766553772102, guid: 1a972eb59a0032246a2ef8392f1f2099,
+        type: 2}
+      propertyPath: useHandObjectAttachmentPoint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266766553772102, guid: 1a972eb59a0032246a2ef8392f1f2099,
+        type: 2}
+      propertyPath: handFollowTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266766553772102, guid: 1a972eb59a0032246a2ef8392f1f2099,
+        type: 2}
+      propertyPath: hideHandOnAttach
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114996334699806280, guid: 1a972eb59a0032246a2ef8392f1f2099, type: 2}
     - {fileID: 114036860237566614, guid: 1a972eb59a0032246a2ef8392f1f2099, type: 2}
@@ -952,15 +967,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400168, guid: b235179bd2a63d1468dd430670338c55, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 400168, guid: b235179bd2a63d1468dd430670338c55, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 400168, guid: b235179bd2a63d1468dd430670338c55, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.3
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
@@ -1325,6 +1340,21 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114266766553772102, guid: 1a972eb59a0032246a2ef8392f1f2099,
+        type: 2}
+      propertyPath: useHandObjectAttachmentPoint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266766553772102, guid: 1a972eb59a0032246a2ef8392f1f2099,
+        type: 2}
+      propertyPath: handFollowTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266766553772102, guid: 1a972eb59a0032246a2ef8392f1f2099,
+        type: 2}
+      propertyPath: hideHandOnAttach
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114996334699806280, guid: 1a972eb59a0032246a2ef8392f1f2099, type: 2}
     - {fileID: 114036860237566614, guid: 1a972eb59a0032246a2ef8392f1f2099, type: 2}
@@ -1659,6 +1689,21 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114266766553772102, guid: 1a972eb59a0032246a2ef8392f1f2099,
+        type: 2}
+      propertyPath: useHandObjectAttachmentPoint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266766553772102, guid: 1a972eb59a0032246a2ef8392f1f2099,
+        type: 2}
+      propertyPath: handFollowTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266766553772102, guid: 1a972eb59a0032246a2ef8392f1f2099,
+        type: 2}
+      propertyPath: hideHandOnAttach
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114996334699806280, guid: 1a972eb59a0032246a2ef8392f1f2099, type: 2}
     - {fileID: 114036860237566614, guid: 1a972eb59a0032246a2ef8392f1f2099, type: 2}
@@ -1705,7 +1750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525729c76cf2576449e24c29a4fece56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: not decided
+  type: HumanReferenceModel
   context: []
   isHided: 0
 --- !u!1 &1787586651 stripped

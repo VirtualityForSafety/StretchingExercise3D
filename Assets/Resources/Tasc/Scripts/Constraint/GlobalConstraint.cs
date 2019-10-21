@@ -6,7 +6,7 @@ namespace Tasc
 {
     public class GlobalConstraint
     {
-        public static int TASK_CANT_SKIP_INTERVAL = 100;
+        public static int TASK_CANT_SKIP_INTERVAL = 200;
         public static int NARRATION_INTERVAL = 10;
     }
 }

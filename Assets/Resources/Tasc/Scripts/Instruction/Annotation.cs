@@ -64,11 +64,11 @@ namespace Tasc
                 {
                     model.hide();
                 }
-                if (interfaces[i].type == "leftHandGuide")
+                if (interfaces[i].type == "LeftHandGuide")
                     interfaces[i].SetPose(model.getLeftHandPos(), Quaternion.identity);
-                else if (interfaces[i].type == "rightHandGuide")
+                else if (interfaces[i].type == "RightHandGuide")
                     interfaces[i].SetPose(model.getRightHandPos(), Quaternion.identity);
-                else if (interfaces[i].type == "headGuide")
+                else if (interfaces[i].type == "HeadGuide")
                     interfaces[i].SetPose(model.getHeadPos(), Quaternion.identity);
             }
         }

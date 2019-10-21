@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tasc
 {
-    public class Scenario
+    public class ProceduralScenario
     {
         public string name;
         public string description;
@@ -12,7 +12,7 @@ namespace Tasc
 
         public bool isActivated;
 
-        public Scenario(string _name, string _description)
+        public ProceduralScenario(string _name, string _description)
         {
             name = _name;
             description = _description;

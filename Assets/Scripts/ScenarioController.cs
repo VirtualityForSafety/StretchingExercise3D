@@ -9,7 +9,7 @@ namespace Tasc
     {
         bool isTerminusExported = false;
         bool isActionExported = false;
-        Scenario scenario = new Scenario("Stretching exercise", "A user is required to memorize five stretching poses in order.");
+        ProceduralScenario scenario = new ProceduralScenario("Stretching exercise", "A user is required to memorize five stretching poses in order.");
 
         public List<TransferElement> interfaces;
         public Actor actor;
@@ -49,7 +49,7 @@ namespace Tasc
             Annotation annotation = new Annotation("Body parts guidance", terminusesForAnnotation);
             ModelPoser modelPoser = FindObjectOfType<ModelPoser>();
             annotation.SetModel(modelPoser);
-            annotation.SetVisibility(false);
+            //annotation.SetVisibility(false);
 
             Task introduction = new Task("Intro", "");
             Instruction introInstruction = new Instruction(introduction.name, interfaces);
@@ -67,11 +67,12 @@ namespace Tasc
             task1Instruction.SetContent("description", "First, forward bend pose. \nIn a standing position, lean forward and extend your arms downwards. \nGrip controller when you are done.");
             task1.AddInstruction(task1Instruction);
             Annotation annotation1 = new Annotation(annotation);
-            annotation1.SetContent("rightHandGuide","forward bend pose");
-            annotation1.SetContent("leftHandGuide", "forward bend pose");
-            annotation1.SetContent("headGuide", "forward bend pose");
+            annotation1.SetContent("RightHandGuide","forward bend pose");
+            annotation1.SetContent("LeftHandGuide", "forward bend pose");
+            annotation1.SetContent("HeadGuide", "forward bend pose");
             task1.AddInstruction(annotation1);
-            task1.exit = new Condition(new OTouchDownState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
+            //task1.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal, new TimeState(0, 0, 3));
+            task1.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
             scenario.Add(task1);
 
             Task task2 = new Task("Task2", "");
@@ -81,11 +82,12 @@ namespace Tasc
             task2Instruction.SetContent("description", "Second, triangle pose. \nTilt your waist to the left with your left arm lowered to the floor. \nIn this state, your right arm is fully extended in the direction of the sky \nand your gaze is directed at the tip of your right hand. \nGrip controller when you are done.");
             task2.AddInstruction(task2Instruction);
             Annotation annotation2 = new Annotation(annotation);
-            annotation2.SetContent("rightHandGuide", "triangle pose");
-            annotation2.SetContent("leftHandGuide", "triangle pose");
-            annotation2.SetContent("headGuide", "triangle pose");
+            annotation2.SetContent("RightHandGuide", "triangle pose");
+            annotation2.SetContent("LeftHandGuide", "triangle pose");
+            annotation2.SetContent("HeadGuide", "triangle pose");
             task2.AddInstruction(annotation2);
-            task2.exit = new Condition(new OTouchDownState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
+            //task2.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal, new TimeState(0, 0, 3));
+            task2.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
             scenario.Add(task2);
 
             Task task3 = new Task("Task3", "");
@@ -95,11 +97,12 @@ namespace Tasc
             task3Instruction.SetContent("description", "Third, side bend stretch. \nPlace your right hand on your right waist. \nKeep your left arm straight in the sky. \nSlowly tilt your upper body to the right in this position.");
             task3.AddInstruction(task3Instruction);
             Annotation annotation3 = new Annotation(annotation);
-            annotation3.SetContent("rightHandGuide", "side bend stretch");
-            annotation3.SetContent("leftHandGuide", "side bend stretch");
-            annotation3.SetContent("headGuide", "side bend stretch");
+            annotation3.SetContent("RightHandGuide", "side bend stretch");
+            annotation3.SetContent("LeftHandGuide", "side bend stretch");
+            annotation3.SetContent("HeadGuide", "side bend stretch");
             task3.AddInstruction(annotation3);
-            task3.exit = new Condition(new OTouchDownState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
+            //task3.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal, new TimeState(0, 0, 3));
+            task3.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
             scenario.Add(task3);
 
             Task task4 = new Task("Task4", "");
@@ -109,11 +112,12 @@ namespace Tasc
             task4Instruction.SetContent("description", "Fourth, mountain pose. \nWith your shoulders relaxed, place your arms above your head in an upright position \nand stretch your arms all the way up. Point your eyes forward.");
             task4.AddInstruction(task4Instruction);
             Annotation annotation4 = new Annotation(annotation);
-            annotation4.SetContent("rightHandGuide", "mountain pose");
-            annotation4.SetContent("leftHandGuide", "mountain pose");
-            annotation4.SetContent("headGuide", "mountain pose");
+            annotation4.SetContent("RightHandGuide", "mountain pose");
+            annotation4.SetContent("LeftHandGuide", "mountain pose");
+            annotation4.SetContent("HeadGuide", "mountain pose");
             task4.AddInstruction(annotation4);
-            task4.exit = new Condition(new OTouchDownState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
+            //task4.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal, new TimeState(0, 0, 3));
+            task4.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
             scenario.Add(task4);
 
             Task task5 = new Task("Task5", "");
@@ -123,11 +127,12 @@ namespace Tasc
             task5Instruction.SetContent("description", "Fifth, neck relaxing pose. \nPlace your hands on your back in a standing position. \nIn this position, turn your head and eyes toward the sky. ");
             task5.AddInstruction(task5Instruction);
             Annotation annotation5 = new Annotation(annotation);
-            annotation5.SetContent("rightHandGuide", "neck relaxing pose");
-            annotation5.SetContent("leftHandGuide", "neck relaxing pose");
-            annotation5.SetContent("headGuide", "neck relaxing pose");
+            annotation5.SetContent("RightHandGuide", "neck relaxing pose");
+            annotation5.SetContent("LeftHandGuide", "neck relaxing pose");
+            annotation5.SetContent("HeadGuide", "neck relaxing pose");
             task5.AddInstruction(annotation5);
-            task5.exit = new Condition(new OTouchDownState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
+            //task5.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal, new TimeState(0, 0, 3));
+            task5.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
             scenario.Add(task5);
 
             Task ending = new Task("Finish", "");
@@ -136,7 +141,7 @@ namespace Tasc
             endInstruction.SetContent("narration", "Well done! Your training is successfully terminated.");
             endInstruction.SetContent("description", "Well done! Your training is successfully terminated.");
             ending.AddInstruction(endInstruction);
-            ending.exit = new Condition(new OTouchDownState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
+            ending.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), Condition.RelationalOperator.Equal);
             scenario.Add(ending);
 
             scenario.MakeProcedure();
