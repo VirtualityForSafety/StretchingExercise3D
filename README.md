@@ -9,7 +9,6 @@ StretchingExercise3D is a stretching exercise which includes five sequential pos
 
 ## Platform support
 * SteamVR (Oculus)
-* Desktop
 
 ## Dependency
 - [Tasc-Unity 0.1.1](https://github.com/JinkiJung/Tasc-Unity)
