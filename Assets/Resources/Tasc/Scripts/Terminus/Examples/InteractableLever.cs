@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 namespace Tasc
 {
-    public class Lever : Terminus
+    [RequireComponent(typeof(Interactable))]
+    public class InteractableLever : TerminusSteamVR
     {
         public int gear;
         public float length;
@@ -68,7 +70,7 @@ namespace Tasc
 
                 return terminus;
             }
-            
+
         }
 
         public void Log()
@@ -114,5 +116,24 @@ namespace Tasc
         {
             Initialize();
         }
+
+        public override void Awake()
+        {
+            base.Awake();
+            pivotPoint = transform.parent.transform.Find("PivotPoint").transform;
+            SetLength(Vector3.Distance(this.transform.position, pivotPoint.position));
+            SetPivot(pivotPoint);
+        }
+
+        public override void Proceed(Hand hand)
+        {
+            UpdateInControl(hand);
+            if (isInControl)
+            {
+                Transform newTrans = Control(this.transform, hand.transform.position, hand.transform.rotation);
+                this.transform.SetPositionAndRotation(newTrans.position, newTrans.rotation);
+            }
+        }
+
     }
 }

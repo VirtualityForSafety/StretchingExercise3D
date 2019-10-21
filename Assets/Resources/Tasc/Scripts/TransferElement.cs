@@ -24,7 +24,8 @@ namespace Tasc
 
         public void SetVisibility(bool value)
         {
-            currentRenderer.enabled = value;
+            if(currentRenderer!=null)
+                currentRenderer.enabled = value;
         }
 
         public void SetPose(Vector3 position, Quaternion rotation)

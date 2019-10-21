@@ -1,22 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 namespace Tasc
 {
-    public class Joystick : Terminus
+    [RequireComponent(typeof(Interactable))]
+    public class InteractableJoystick : TerminusSteamVR
     {
         Vector3 value;
         const string variableName = "leverCoord";
         public float leverLength { get; set; }
         public Transform pivotPoint { get; set; }
-
-        /*/
-        public Joystick(string _name) : base(_name)
-        {
-            Initialize();
-        }
-        //*/
 
         public override void Initialize()
         {
@@ -39,13 +34,12 @@ namespace Tasc
             //Logging system
             if (GlobalLogger.isLogging == true)
             {
-                //GlobalLogger.addLogData(new GlobalLogger.LogDataFormat("JOYSTICK_X", GlobalLogger.DataType.FLOAT, value.x));
-                //GlobalLogger.addLogData(new GlobalLogger.LogDataFormat("JOYSTICK_Y", GlobalLogger.DataType.FLOAT, value.y));
                 GlobalLogger.addLogDataOnce(new GlobalLogger.LogDataFormat(name, GlobalLogger.DataType.VEC3, value));
             }
         }
 
-        public override Transform Control(Transform terminus, Vector3 controlVector, Quaternion controlRotation, bool givenFromDesktop = false) {
+        public override Transform Control(Transform terminus, Vector3 controlVector, Quaternion controlRotation, bool givenFromDesktop = false)
+        {
             if (givenFromDesktop)
             {
                 value += new Vector3(controlVector.x, controlVector.y, 0);
@@ -76,12 +70,12 @@ namespace Tasc
                 Send();
 
                 return terminus;
-            }            
+            }
         }
 
         public override void Send()
         {
-            ConditionPublisher.Instance.Send(new VectorVariableState(this,variableName,value));
+            ConditionPublisher.Instance.Send(new VectorVariableState(this, variableName, value));
         }
 
         public override string ToString()
@@ -93,5 +87,25 @@ namespace Tasc
         {
             Initialize();
         }
+        
+        public override void Awake()
+        {
+            base.Awake();
+            pivotPoint = transform.parent.transform.Find("PivotPoint").transform;
+            SetLength(Vector3.Distance(this.transform.position, pivotPoint.position));
+            SetPivot(pivotPoint);
+        }
+
+        public override void Proceed(Hand hand)
+        {
+            UpdateInControl(hand);            
+            if (isInControl)
+            {
+                Debug.Log(hand);
+                Transform newTrans = Control(this.transform, hand.transform.position, hand.transform.rotation);
+                this.transform.SetPositionAndRotation(newTrans.position, newTrans.rotation);
+            }
+        }
     }
 }
+

@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
+
 namespace Tasc
 {
-    public class Wheel : Terminus
+    [RequireComponent(typeof(Interactable))]
+    public class InteractableWheel : TerminusSteamVR
     {
         public static float WHEEL_MIN_LOOP_ANGLE = 15;
         public static float WHEEL_LOOP_ANGLE = 200;
@@ -47,7 +50,7 @@ namespace Tasc
                 Send();
                 prevAngle += angle;
             }
-                
+
         }
 
         public override void Send()
@@ -61,7 +64,7 @@ namespace Tasc
 
         private void AlertCWCCW()
         {
-            
+
         }
 
         public override string ToString()
@@ -78,7 +81,7 @@ namespace Tasc
                 terminus.transform.rotation = Quaternion.AngleAxis(-angle, Vector3.up);
 
                 Log();
-            }        
+            }
 
             return terminus;
         }
@@ -94,6 +97,25 @@ namespace Tasc
         private void Start()
         {
             Initialize();
+        }
+
+        CircularDrive circularDrive;
+        public Transform pivotPoint { get; set; }
+
+        public override void Awake()
+        {
+            base.Awake();
+            circularDrive = GetComponent<CircularDrive>();
+        }
+
+        public override void Proceed(Hand hand)
+        {
+            UpdateInControl(hand);
+            if (isInControl)
+            {
+                Control(this.transform, hand.transform.position, hand.transform.rotation);
+                SetAngle(circularDrive.outAngle);
+            }
         }
     }
 }

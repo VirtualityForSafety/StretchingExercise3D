@@ -9,7 +9,7 @@ namespace Tasc
         public static string ToJSON(Terminus obj)
         {
             string result = "\"" + obj.name + "\":{";
-            Collider collider = obj.terminusChecker;
+            Collider collider = obj.GetComponent<Collider>();
             result += "\"terminus\":{";
             //result += "{\"rotation\":" + Vec3ToJSON(transform.rotation.eulerAngles);
             //result += "{\"localRotation\":" + Vec3ToJSON(transform.localRotation.eulerAngles);

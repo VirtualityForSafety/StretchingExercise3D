@@ -2305,7 +2305,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 
   context: []
-  terminusChecker: {fileID: 0}
   isWalkable: 1
 --- !u!114 &114135139926761830
 MonoBehaviour:
@@ -2368,7 +2367,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 
   context: []
-  terminusChecker: {fileID: 0}
 --- !u!114 &114280865114953966
 MonoBehaviour:
   m_ObjectHideFlags: 1

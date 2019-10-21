@@ -7,7 +7,7 @@ using Valve.VR.InteractionSystem;
 namespace Tasc
 {
     [RequireComponent(typeof(Interactable))]
-    public class FeedbackSteamVR : FeedbackDT
+    public class TerminusSteamVR : Terminus
     {
         public List<Interface> interfaces;
 
@@ -22,18 +22,6 @@ namespace Tasc
             isInControl = false;
         }
 
-        public override void OnMouseDrag()
-        {
-            if (PlatformSelector.GetCurrentPlatform() == Platform.Desktop)
-            {
-                base.OnMouseDrag();
-                //Debug.Log(dragDirection);
-                Transform newTrans = terminus.Control(this.transform, currentPosition,Quaternion.identity, true);
-                if(newTrans)
-                    this.transform.SetPositionAndRotation(newTrans.position, newTrans.rotation);
-            }
-        }
-
         private void Update()
         {
             UpdateInstructions(interfaces);
@@ -42,7 +30,7 @@ namespace Tasc
         //-------------------------------------------------
         // Called when a Hand starts hovering over this object
         //-------------------------------------------------
-        private void OnHandHoverBegin(Hand hand)
+        protected void OnHandHoverBegin(Hand hand)
         {
             //Debug.Log("Hovering hand: " + hand.name);
         }
@@ -51,7 +39,7 @@ namespace Tasc
         //-------------------------------------------------
         // Called when a Hand stops hovering over this object
         //-------------------------------------------------
-        private void OnHandHoverEnd(Hand hand)
+        protected void OnHandHoverEnd(Hand hand)
         {
 
         }
@@ -59,20 +47,20 @@ namespace Tasc
         //-------------------------------------------------
         // Called every Update() while a Hand is hovering over this object
         //-------------------------------------------------
-        private void HandHoverUpdate(Hand hand)
+        protected void HandHoverUpdate(Hand hand)
         {
             //Debug.Log("Hovering hand: " + hand.name);
             Proceed(hand);
         }
 
-        private GrabTypes grabbedWithType;
+        protected GrabTypes grabbedWithType;
         public virtual void Proceed(Hand hand)
         {
             UpdateInControl(hand);
             //*
             if (isInControl)
             {
-                Transform newTrans = terminus.Control(this.transform, hand.transform.position, hand.transform.rotation);
+                Transform newTrans = Control(this.transform, hand.transform.position, hand.transform.rotation);
                 if (newTrans)
                     this.transform.SetPositionAndRotation(newTrans.position, newTrans.rotation);
             }
@@ -99,7 +87,7 @@ namespace Tasc
         {
             for (int i = 0; i < interfaces.Count; i++)
             {
-                terminus.UpdateInterface(interfaces[i]);
+                UpdateInterface(interfaces[i]);
             }
         }
 

@@ -13,19 +13,18 @@ namespace Tasc
         {
             for (int i=0; i< interactableButtons.Count; i++)
             {
-                if((interactableButtons[i].terminus as Button).isPushed){
+                if(interactableButtons[i].isPushed){
                     if (i == recentlyPushedIdx)
-                        (interactableButtons[i].terminus as Button).isPushed = false;
+                        interactableButtons[i].isPushed = false;
                     else
                     {
                         recentlyPushedIdx = i;
-                        result = interactableButtons[i].terminus.name;
+                        result = interactableButtons[i].name;
                     }
                 }
             }
             Set3DText("Pushed: " + (result ==""? "None":result));
         }
     }
-
 }
 

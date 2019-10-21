@@ -28,9 +28,19 @@ namespace Tasc
         void MakeTestScenario()
         {
             ////////////// actor null exception 
-            Terminus leftHandBall = GameObject.Find("LeftHandPose").GetComponent<Terminus>();
-            Terminus rightHandBall = GameObject.Find("RightHandPose").GetComponent<Terminus>();
-            Terminus headBall = GameObject.Find("HeadPose").GetComponent<Terminus>();
+            GuideBall leftHandBall = GameObject.Find("LeftHandPose").GetComponent<GuideBall>();
+            GuideBall rightHandBall = GameObject.Find("RightHandPose").GetComponent<GuideBall>();
+            GuideBall headBall = GameObject.Find("HeadPose").GetComponent<GuideBall>();
+
+            Valve.VR.InteractionSystem.Hand[] hands = FindObjectsOfType<Valve.VR.InteractionSystem.Hand>();
+            for(int i=0; i<hands.Length; i++)
+            {
+                if (hands[i].handType == Valve.VR.SteamVR_Input_Sources.LeftHand)
+                    leftHandBall.target = hands[i].transform;
+                else if (hands[i].handType == Valve.VR.SteamVR_Input_Sources.RightHand)
+                    rightHandBall.target = hands[i].transform;
+            }
+            headBall.target = GameObject.Find("HeadCollider").transform;
 
             List<TransferElement> terminusesForAnnotation = new List<TransferElement>();
             terminusesForAnnotation.Add(leftHandBall);

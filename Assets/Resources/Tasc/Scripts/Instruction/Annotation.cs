@@ -50,7 +50,6 @@ namespace Tasc
             
             for(int i=0; i<interfaces.Count; i++)
             {
-                Debug.Log(information.GetContent(interfaces[i].type));
                 if (information.GetContent(interfaces[i].type).Contains("forward bend pose"))
                     model.takePose(0);
                 else if (information.GetContent(interfaces[i].type).Contains("triangle pose"))

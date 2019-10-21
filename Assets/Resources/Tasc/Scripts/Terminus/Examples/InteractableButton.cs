@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
+
 namespace Tasc
 {
-    public class Button : Terminus
+    [RequireComponent(typeof(Interactable))]
+    public class InteractableButton : TerminusSteamVR
     {
         public bool isPushed = false;
         const string variableName = "isPushed";
@@ -21,7 +24,7 @@ namespace Tasc
 
         public override string ToString()
         {
-            return base.ToString() + " : Value (" + (isPushed)+")";
+            return base.ToString() + " : Value (" + (isPushed) + ")";
         }
 
         public void Log()
@@ -47,6 +50,21 @@ namespace Tasc
         private void Start()
         {
             Initialize();
+        }
+
+        public override void Awake()
+        {
+            base.Awake();
+        }
+
+        public override void Proceed(Hand hand)
+        {
+            UpdateInControl(hand);
+            if (isInControl)
+            {
+                Transform newTrans = Control(this.transform, hand.transform.position,hand.transform.rotation);
+                this.transform.SetPositionAndRotation(newTrans.position, newTrans.rotation);
+            }
         }
     }
 }

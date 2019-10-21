@@ -6,7 +6,7 @@ namespace Tasc
 {
     public class Terminus : TransferElement
     {
-        public Collider terminusChecker;
+        protected Collider terminusChecker;
 
         private Vector3 previousPosition;        
 

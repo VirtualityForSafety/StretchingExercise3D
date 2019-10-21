@@ -535,7 +535,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1328160147549414, guid: 1a972eb59a0032246a2ef8392f1f2099,
     type: 2}
   m_PrefabInternal: {fileID: 908221521}
---- !u!114 &573547270
+--- !u!114 &573547269
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -543,10 +543,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 573547268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a86ea52710a9b7419ef091cb43f7234, type: 3}
+  m_Script: {fileID: 11500000, guid: 740ce7c2f8e1c2b42b78504ad44ce700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Status
+  type: headGuideText
   context: []
 --- !u!1 &580765785
 GameObject:
@@ -591,12 +591,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 582468202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e4aaa0e8ffdee8449ba9ea7d67af6b7, type: 3}
+  m_Script: {fileID: 11500000, guid: c91c5f2912de50248803a0d79a819479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: headGuide
+  type: HeadGuide
   context: []
-  terminusChecker: {fileID: 0}
+  interfaces:
+  - {fileID: 573547269}
+  target: {fileID: 0}
 --- !u!1 &707494226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,7 +1005,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1328160147549414, guid: 1a972eb59a0032246a2ef8392f1f2099,
     type: 2}
   m_PrefabInternal: {fileID: 1609433242}
---- !u!114 &978326525
+--- !u!114 &978326524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1011,10 +1013,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 978326523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a86ea52710a9b7419ef091cb43f7234, type: 3}
+  m_Script: {fileID: 11500000, guid: 740ce7c2f8e1c2b42b78504ad44ce700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Status
+  type: leftHandGuideText
   context: []
 --- !u!1 &1069208844
 GameObject:
@@ -1705,7 +1707,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: not decided
   context: []
-  terminusChecker: {fileID: 0}
   isHided: 0
 --- !u!1 &1787586651 stripped
 GameObject:
@@ -1720,12 +1721,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1787586651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e4aaa0e8ffdee8449ba9ea7d67af6b7, type: 3}
+  m_Script: {fileID: 11500000, guid: c91c5f2912de50248803a0d79a819479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: rightHandGuide
+  type: RightHandGuide
   context: []
-  terminusChecker: {fileID: 0}
+  interfaces:
+  - {fileID: 1893749252}
+  target: {fileID: 0}
 --- !u!1 &1794918250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,12 +1808,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1817737584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e4aaa0e8ffdee8449ba9ea7d67af6b7, type: 3}
+  m_Script: {fileID: 11500000, guid: c91c5f2912de50248803a0d79a819479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: leftHandGuide
+  type: LeftHandGuide
   context: []
-  terminusChecker: {fileID: 0}
+  interfaces:
+  - {fileID: 978326524}
+  target: {fileID: 0}
 --- !u!1 &1856428176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,7 +1858,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1328160147549414, guid: 1a972eb59a0032246a2ef8392f1f2099,
     type: 2}
   m_PrefabInternal: {fileID: 1332144712}
---- !u!114 &1893749253
+--- !u!114 &1893749252
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1861,10 +1866,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1893749251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a86ea52710a9b7419ef091cb43f7234, type: 3}
+  m_Script: {fileID: 11500000, guid: 740ce7c2f8e1c2b42b78504ad44ce700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Status
+  type: rightHandGuideText
   context: []
 --- !u!1 &1949567186
 GameObject:
