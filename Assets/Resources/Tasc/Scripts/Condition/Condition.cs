@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Tasc
 {
-    public class Condition
+    public class Condition : Expression
     {
         public static Condition DummyCondition = new Condition(true);
         public static Condition NeverSatisfied = new Condition(false);
@@ -15,20 +15,6 @@ namespace Tasc
         // should implement as multiple operator and operand
         ////////////////////////////////////////////////
         ///
-        public enum RelationalOperator
-        {
-            Larger = 0,
-            LargerOrEqual = 1,
-            Equal = 2,
-            SmallerOrEqual = 3,
-            Smaller = 4,
-            NotEqual = 5
-        }
-
-        public static RelationalOperator Inverse(RelationalOperator ope)
-        {
-            return (RelationalOperator)(((int)ope + 3) % 6);
-        }
 
         public RelationalOperator comparison;
         public State endConditionState = null;
@@ -36,18 +22,6 @@ namespace Tasc
         public bool isSatisfied;
         public int holdingCount;
         public bool isActivated;
-
-        // Condition as a container of multiple conditions
-
-        public enum LogicalOperator
-        {
-            And = 0,
-            Or = 1
-        }
-        public Condition condition1;
-        public Condition condition2;
-        public LogicalOperator interRelationship;
-        private bool hasMultipleConditions;
 
         // constructor for dummy condition
         public Condition(bool _isSatisfied)
@@ -57,7 +31,6 @@ namespace Tasc
             comparison = RelationalOperator.NotEqual;
             holdingTimer = null;
             holdingCount = 0;
-            hasMultipleConditions = false;
         }
 
         public Condition(State _endCondition, RelationalOperator _comparison)
@@ -67,20 +40,10 @@ namespace Tasc
             isSatisfied = false;
             holdingTimer = null;
             holdingCount = 0;
-            hasMultipleConditions = false;
         }
 
         public Condition(State _endCondition, RelationalOperator _comparison, TimeState _elapsedState): this(_endCondition, _comparison)
         {
-            holdingTimer = _elapsedState;
-        }
-
-        public Condition(Condition _c1, LogicalOperator _ope, Condition _c2, TimeState _elapsedState = null)
-        {
-            condition1 = _c1;
-            condition2 = _c2;
-            interRelationship = _ope;
-            hasMultipleConditions = true;
             holdingTimer = _elapsedState;
         }
 
@@ -89,49 +52,32 @@ namespace Tasc
             Deactivate();
         }
 
-        public void ActivateAndStartMonitoring()
+        public override void ActivateAndStartMonitoring()
         {
             if (!isActivated)
             {
                 isActivated = true;
-                StartMonitoring();
-                if (hasMultipleConditions)
-                {
-                    if(condition1!=null)
-                        condition1.Activate();
-                    if (condition2 != null)
-                        condition2.Activate();
-                }                    
+                StartMonitoring();                 
             }
         }
 
-        public void Activate()
+        public override void Activate()
         {
             isActivated = true;
         }
 
-        public void Deactivate()
+        public override void Deactivate()
         {
             if (isActivated)
             {
                 isActivated = false;
                 StopMonitoring();
-                if (hasMultipleConditions)
-                {
-                    if (condition1 != null)
-                        condition1.Deactivate();
-                    if (condition2 != null)
-                        condition2.Deactivate();
-                }
             }
         }
 
         public override string ToString()
         {
-            if (hasMultipleConditions)
-                return condition1 + "\t" + (interRelationship == LogicalOperator.And ? "AND" : "OR") + "\t" + condition2;
-            else
-                return endConditionState + " : " + comparison + (holdingTimer==null? "" : " (during "+holdingTimer.ToString()+")");
+            return endConditionState + " : " + comparison + (holdingTimer == null ? "" : " (during " + holdingTimer.ToString() + ")");
         }
 
         public void StartMonitoring()
@@ -150,7 +96,7 @@ namespace Tasc
                 Check(state);
         }
 
-        public bool Check(State state1, State state2, RelationalOperator ope, TimeState timeState = null)
+        public override bool Check(State state1, Operator ope, State state2, TimeState timeState = null)
         {
             if (isSatisfied)
                 return true;
@@ -207,34 +153,16 @@ namespace Tasc
 
         public bool Check(State state, TimeState timeState = null)
         {
-            if (!hasMultipleConditions)
-            {
-                //Debug.Log(endConditionState);
-                //Debug.Log(state);
-                if (endConditionState.GetType() == typeof(TimeState))
-                    return HandleTimeState(this);
-                else if (endConditionState.GetType() == typeof(TaskState))
-                    return HandleTaskState(this);
-                else if (endConditionState.GetType() == typeof(VariableDistanceState) && state.GetType().IsSubclassOf(typeof(VariableState)))
-                    return HandleVariableDistanceState(this, state, timeState);
-                else if (endConditionState.GetType() == typeof(DistanceState))
-                    return HandleDistanceState(this, state, timeState);
-                else
-                    return Check(state, endConditionState, comparison, timeState);
-            }
+            if (endConditionState.GetType() == typeof(TimeState))
+                return HandleTimeState(this);
+            else if (endConditionState.GetType() == typeof(TaskState))
+                return HandleTaskState(this);
+            else if (endConditionState.GetType() == typeof(VariableDistanceState) && state.GetType().IsSubclassOf(typeof(VariableState)))
+                return HandleVariableDistanceState(this, state, timeState);
+            else if (endConditionState.GetType() == typeof(DistanceState))
+                return HandleDistanceState(this, state, timeState);
             else
-            {
-                isSatisfied = false;
-                //Debug.Log("Condition1 : " + condition1.Check(state, timeState));
-                //Debug.Log("Condition2 : " + condition2.Check(state, timeState));
-                if (interRelationship == LogicalOperator.And)
-                    isSatisfied = condition1.Check(state, timeState) && condition2.Check(state, timeState);
-                else if (interRelationship == LogicalOperator.Or)
-                    isSatisfied = condition1.Check(state, timeState) && condition2.Check(state, timeState);
-                else
-                    throw new Exception("No logical operator set.");
-                return isSatisfied;
-            }
+                return Check(state, comparison, endConditionState, timeState);
         }
 
         // passive check
@@ -244,28 +172,13 @@ namespace Tasc
                 return false;
             if (isSatisfied)
                 return true;
-            if (!hasMultipleConditions)
-            {
-                if (endConditionState == null)
-                    throw new MissingComponentException();
-                if (ShouldCheckTimeState())
-                    return HandleTimeState(this);
-                else if (ShouldCheckTaskState())
-                    return HandleTaskState(this);
-            }
-            else
-            {
-                // for the case where two conditions are both passive types...
-                if(condition1.ShouldCheckPassively() && condition2.ShouldCheckPassively())
-                {
-                    //Debug.Log("Condition1 : " + condition1.Check());
-                    //Debug.Log("Condition2 : " + condition2.Check());
-                    if (interRelationship == LogicalOperator.And)
-                        return condition1.Check() && condition2.Check();
-                    else if (interRelationship == LogicalOperator.Or)
-                        return condition1.Check() || condition2.Check();
-                }
-            }
+
+            if (endConditionState == null)
+                throw new MissingComponentException();
+            if (ShouldCheckTimeState())
+                return HandleTimeState(this);
+            else if (ShouldCheckTaskState())
+                return HandleTaskState(this);
             return false;
         }
 
@@ -291,7 +204,7 @@ namespace Tasc
             if ((state as MoveState) != null)
             {
                 if (var1.hasMoveStateFromSameTerminus(var2))
-                    return Check(var1.GetUpdated(var2), cond.endConditionState, cond.comparison, timeState);
+                    return Check(var1.GetUpdated(var2), cond.comparison, cond.endConditionState, timeState);
             }
             return false;
         }
@@ -304,7 +217,7 @@ namespace Tasc
                 VariableState var2 = state as VariableState;
                 if (VariableState.IsSameVariable(var1.stateVar1, var2))
                 {
-                    return Check(new VariableDistanceState(var1, var2), cond.endConditionState, cond.comparison, timeState);
+                    return Check(new VariableDistanceState(var1, var2), cond.comparison, cond.endConditionState, timeState);
                 }
                     
             }
@@ -315,7 +228,7 @@ namespace Tasc
         {
             if (ShouldCheckTimeState())
             {
-                return Check(TimeState.GlobalTimer, cond.endConditionState, cond.comparison);
+                return Check(TimeState.GlobalTimer, cond.comparison, cond.endConditionState);
             }
             else
                 return false;
@@ -327,7 +240,7 @@ namespace Tasc
             {
                 TaskState taskState = cond.endConditionState as TaskState;
                 //Debug.Log("HandleTaskState : " + Check(new TaskState(taskState.task), cond.endConditionState, cond.comparison));
-                return Check(new TaskState(taskState.task), cond.endConditionState, cond.comparison);
+                return Check(new TaskState(taskState.task), cond.comparison, cond.endConditionState);
             }
             else
                 return false;
