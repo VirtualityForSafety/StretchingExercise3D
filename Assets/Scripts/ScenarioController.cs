@@ -7,8 +7,6 @@ namespace Tasc
 {
     public class ScenarioController : MonoBehaviour
     {
-        bool isTerminusExported = false;
-        bool isActionExported = false;
         ProceduralScenario scenario = new ProceduralScenario("Stretching exercise", "A user is required to memorize five stretching poses in order.");
 
         public List<TransferElement> interfaces;
@@ -71,8 +69,7 @@ namespace Tasc
             annotation1.SetContent("LeftHandGuide", "forward bend pose");
             annotation1.SetContent("HeadGuide", "forward bend pose");
             task1.AddInstruction(annotation1);
-            //task1.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3));
-            task1.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal);
+            task1.exit = new ConditionContainer(new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3)), LogicalOperator.And, new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal));
             scenario.Add(task1);
 
             Task task2 = new Task("Task2", "");
@@ -86,8 +83,7 @@ namespace Tasc
             annotation2.SetContent("LeftHandGuide", "triangle pose");
             annotation2.SetContent("HeadGuide", "triangle pose");
             task2.AddInstruction(annotation2);
-            //task2.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3));
-            task2.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal);
+            task2.exit = new ConditionContainer(new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3)), LogicalOperator.And, new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal));
             scenario.Add(task2);
 
             Task task3 = new Task("Task3", "");
@@ -101,8 +97,7 @@ namespace Tasc
             annotation3.SetContent("LeftHandGuide", "side bend stretch");
             annotation3.SetContent("HeadGuide", "side bend stretch");
             task3.AddInstruction(annotation3);
-            //task3.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3));
-            task3.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal);
+            task3.exit = new ConditionContainer(new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3)), LogicalOperator.And, new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal));
             scenario.Add(task3);
 
             Task task4 = new Task("Task4", "");
@@ -116,8 +111,7 @@ namespace Tasc
             annotation4.SetContent("LeftHandGuide", "mountain pose");
             annotation4.SetContent("HeadGuide", "mountain pose");
             task4.AddInstruction(annotation4);
-            //task4.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3));
-            task4.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal);
+            task4.exit = new ConditionContainer(new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3)), LogicalOperator.And, new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal));
             scenario.Add(task4);
 
             Task task5 = new Task("Task5", "");
@@ -131,8 +125,7 @@ namespace Tasc
             annotation5.SetContent("LeftHandGuide", "neck relaxing pose");
             annotation5.SetContent("HeadGuide", "neck relaxing pose");
             task5.AddInstruction(annotation5);
-            //task5.exit = new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3));
-            task5.exit = new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal);
+            task5.exit = new ConditionContainer(new Condition(new OTouchHoldState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal, new TimeState(0, 0, 3)), LogicalOperator.And, new Condition(new OTouchUpState(actor, (int)Valve.VR.InteractionSystem.GrabTypes.Grip), RelationalOperator.Equal));
             scenario.Add(task5);
 
             Task ending = new Task("Finish", "");

@@ -19,9 +19,9 @@ namespace Tasc
         public RelationalOperator comparison;
         public State endConditionState = null;
         public TimeState holdingTimer;
-        public bool isSatisfied;
+        protected bool isSatisfied;
+        protected bool isActivated;
         public int holdingCount;
-        public bool isActivated;
 
         // constructor for dummy condition
         public Condition(bool _isSatisfied)
@@ -75,6 +75,11 @@ namespace Tasc
             }
         }
 
+        public override bool IsActivated()
+        {
+            return isActivated;
+        }
+
         public override string ToString()
         {
             return endConditionState + " : " + comparison + (holdingTimer == null ? "" : " (during " + holdingTimer.ToString() + ")");
@@ -92,11 +97,11 @@ namespace Tasc
 
         public void Send(State state)
         {
-            if(isActivated && !isSatisfied)
-                Check(state);
+            if(IsActivated() && !IsSatisfied())
+                CheckActive(state);
         }
 
-        public override bool Check(State state1, Operator ope, State state2, TimeState timeState = null)
+        protected override bool Check(State state1, Operator ope, State state2, TimeState timeState = null)
         {
             if (isSatisfied)
                 return true;
@@ -151,7 +156,7 @@ namespace Tasc
             return isSatisfied;
         }
 
-        public bool Check(State state, TimeState timeState = null)
+        public override bool CheckActive(State state, TimeState timeState = null)
         {
             if (endConditionState.GetType() == typeof(TimeState))
                 return HandleTimeState(this);
@@ -166,7 +171,7 @@ namespace Tasc
         }
 
         // passive check
-        public virtual bool Check()
+        public override bool CheckPassive()
         {
             if (!isActivated)
                 return false;
@@ -244,6 +249,11 @@ namespace Tasc
             }
             else
                 return false;
+        }
+
+        public override bool IsSatisfied()
+        {
+            return isSatisfied;
         }
     }
 }

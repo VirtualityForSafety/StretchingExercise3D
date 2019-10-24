@@ -368,7 +368,6 @@ GameObject:
   - component: {fileID: 188950517}
   - component: {fileID: 188950516}
   - component: {fileID: 188950515}
-  - component: {fileID: 188950519}
   m_Layer: 0
   m_Name: BreatheBall
   m_TagString: Untagged
@@ -443,17 +442,6 @@ Transform:
   m_Father: {fileID: 580765786}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &188950519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 188950514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bbb77f8c25be184b9b7c3f808f566c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &260467136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4794018756092336, guid: 1a972eb59a0032246a2ef8392f1f2099,
@@ -758,7 +746,6 @@ GameObject:
   - component: {fileID: 866278643}
   - component: {fileID: 866278646}
   - component: {fileID: 866278645}
-  - component: {fileID: 866278644}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -780,18 +767,6 @@ Transform:
   m_Father: {fileID: 580765786}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &866278644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114036860237566614, guid: 1a972eb59a0032246a2ef8392f1f2099,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 866278642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba312515893014846b900f6bac9e34d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!102 &866278645
 TextMesh:
   serializedVersion: 3
