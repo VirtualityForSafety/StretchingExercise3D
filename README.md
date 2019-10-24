@@ -13,7 +13,7 @@ StretchingExercise3D is a stretching exercise which includes five sequential pos
 ## Dependency
 - [Tasc-Unity 0.1.1](https://github.com/JinkiJung/Tasc-Unity)
 - [Unity Windows Text-To-Speech](https://github.com/VirtualityForSafety/UnityWindowsTTS)
-- SteamVR Plugin 2.3.2 (sdk 1.4.18)
+- SteamVR Plugin 2.4.5 (sdk 1.7.15)
 - Unity Standard Assets 1.1.5
 
 ## How to use it
