@@ -11,10 +11,10 @@ namespace Tasc
         public int priority;
         public bool isActivated;
         public Terminus actor;
-        public Condition entrance;
+        public Expression entrance;
         public Terminus target;
         public Task action;
-        public Condition exit;
+        public Expression exit;
         public List<Instruction> instructions;
         public Dictionary<TaskEndState, Task> next;
         public TimeState startingTime;
@@ -109,12 +109,13 @@ namespace Tasc
         {
             if (entrance == null || exit == null)
                 throw new MissingComponentException();
-
             if (!isActivated)
                 return false;
+
+            bool resultFromExit = false;
             if (state == TaskProgressState.Idle)
             {
-                if(entrance.Check()){
+                if(entrance.CheckPassive()){
                     state = TaskProgressState.Started;
                     startingTime = new TimeState(TimeState.GetGlobalTimer());
                     cantSkipInterval = GlobalConstraint.TASK_CANT_SKIP_INTERVAL;
@@ -129,23 +130,24 @@ namespace Tasc
                     instructions[i].Proceed();
                     if (!instructions[i].isAudioInstructionEnded())
                         cantSkipInterval--;
-                }                    
-                if (exit.Check())// && cantSkipInterval < 0)
+                }
+                exit.CheckPassive();
+                resultFromExit = exit.IsSatisfied();
+                if (resultFromExit && cantSkipInterval < 0)
                 {
-                    TaskEndState result = Evaluate();
-                    if(result == TaskEndState.Correct)
+                    TaskEndState evaluateResult = Evaluate();
+                    if(evaluateResult == TaskEndState.Correct)
                     {
                         state = TaskProgressState.Ended;
                         for (int i = 0; i < instructions.Count; i++)
                         {
                             instructions[i].WrapUp();
                         }
-                        MoveNext(result);
+                        MoveNext(evaluateResult);
                     }
                 }
-                
             }
-            return exit.isSatisfied;
+            return resultFromExit;
         }
     }
 }
